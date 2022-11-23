@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wdgets_sateful_stateless/components/task.dart';
+import 'package:flutter_wdgets_sateful_stateless/data/task_inherited.dart';
 import 'package:flutter_wdgets_sateful_stateless/screens/form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -18,19 +18,15 @@ class _InitialScreenState extends State<InitialScreen> {
         title: const Text('Tarefas'),
       ),
       body: ListView(
-        children: const [
-          Task('Aprender Flutter', 'assets/images/dash.png', 3),
-          Task('Andar de Bike', 'assets/images/bike.webp', 2),
-          Task('Meditar', 'assets/images/meditar.jpeg', 5),
-          Task('Ler', 'assets/images/livro.jpg', 4),
-          Task('Jogar', 'assets/images/jogar.webp', 1),
-          SizedBox(height: 80)
-        ],
+        padding: const EdgeInsets.only(top: 10, bottom: 100),
+        children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const FormScreen()));
+              context,
+              MaterialPageRoute(
+                  builder: (c) => FormScreen(taskContext: context)));
         },
         child: const Icon(Icons.add),
       ),
