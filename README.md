@@ -1,4 +1,4 @@
-# flutter_wdgets_sateful_stateless
+# flutter_widgets_sateful_stateless
 
 A new basic Flutter project.
 
