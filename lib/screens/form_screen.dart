@@ -17,6 +17,22 @@ class _FormScreenState extends State<FormScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  bool difficultyValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      if (int.parse(value) > 5 || int.parse(value) < 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -44,9 +60,10 @@ class _FormScreenState extends State<FormScreen> {
                             border: OutlineInputBorder(),
                             labelText: 'Descrição da Tarefa',
                             fillColor: Colors.white70,
-                            filled: true),
+                            filled: true
+                        ),
                         validator: (String? value) {
-                          if (value == null || value.isEmpty) {
+                          if (valueValidator(value)) {
                             return 'Por favor, insira uma descrição';
                           }
                           return null;
@@ -64,9 +81,7 @@ class _FormScreenState extends State<FormScreen> {
                             fillColor: Colors.white70,
                             filled: true),
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              int.parse(value) < 1 ||
-                              int.parse(value) > 5) {
+                          if (difficultyValidator(value)) {
                             return 'Por favor, insira uma dificuldade';
                           }
                           return null;
@@ -88,7 +103,7 @@ class _FormScreenState extends State<FormScreen> {
                             filled: true
                         ),
                         validator: (value) {
-                          if (value!.isEmpty) {
+                          if (valueValidator(value)) {
                             return 'Por favor, insira uma imagem';
                           }
                           return null;
